@@ -11,7 +11,7 @@
     "href": "breed_rank.html",
     "title": "Breed Rankings",
     "section": "",
-    "text": "library(tidyverse)\nlibrary(ggplot2)\n\nbreed_rank_all &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-02-01/breed_rank.csv')\n\n\nggplot(breed_rank_all, aes(x = `2013 Rank`, y = `2020 Rank`)) + \n    geom_point() +\n    geom_abline(slope = 1, intercept = 0, color = \"red\") +\n    labs(title = \"Dog Breed Rankings 2013 vs 2020\" )"
+    "text": "Link to Github: https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-02-04\nThe Breed Rank data gives information about different types of breek ranks. The specific dataset called breed_rank_all gives information about the ranking of each dog breed recorded from the years 2013 to 2020. There are 195 different types of breeds that this data set contains.\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\nbreed_rank_all &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-02-01/breed_rank.csv')\n\n\nggplot(breed_rank_all, aes(x = `2013 Rank`, y = `2020 Rank`)) + \n    geom_point() +\n    geom_abline(slope = 1, intercept = 0, color = \"red\") +\n    labs(title = \"Dog Breed Rankings 2013 vs 2020\" )\n\n\n\n\n\n\n\n\nThe graph compares the dog breed rankings from the year 2013 to the year 2020. The red slope line attemps to highlight how the ranking between each year doesn’t change much. It would be interesting to learn more about which specific breeds are farther away from this trendline."
   },
   {
     "objectID": "about.html",
@@ -25,6 +25,6 @@
     "href": "simpson_episodes.html",
     "title": "Simpson Episodes",
     "section": "",
-    "text": "library(tidyverse)\nlibrary(ggplot2)\n\nsimpsons_episodes &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_episodes.csv')\n\n\nggplot(simpsons_episodes, aes(x = views, y = imdb_rating)) + \n    geom_point() +\n    labs(title = \"Rating vs Views of Simpsons Episodes\" )"
+    "text": "This data set analyzes the episodes from the tv show The Simpsons. Episodes and script lines have been filtered to only include episodes from 2010 to 2016. The data contains information about the imdb rating, voting, number in the series, season, title, views, and more.\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\nsimpsons_episodes &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_episodes.csv')\n\n\nggplot(simpsons_episodes, aes(x = views, y = imdb_rating)) + \n    geom_point() +\n    labs(title = \"Rating vs Views of Simpsons Episodes\" )\n\n\n\n\n\n\n\n\nThis data shows"
   }
 ]

@@ -6,8 +6,6 @@ website:
   title: "Sabina Peterson Rajalingam's Website"
   navbar:
     right:
-    - text: About Me
-      href: about.html
     - text: Data Viz
       menu: 
       - text: Dog Breed Ranks

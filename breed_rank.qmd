@@ -7,6 +7,12 @@ execute:
   message: false
 ---
 
+Link to Original Data: 
+
+Link to Github: https://github.com/rfordatascience/tidytuesday/tree/main/data/2022/2022-02-01
+
+The Breed Rank data gives information about different types of breek ranks. The specific dataset called breed_rank_all gives information about the ranking of each dog breed recorded from the years 2013 to 2020. There are 195 different types of breeds that this data set contains. 
+
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -22,3 +28,5 @@ ggplot(breed_rank_all, aes(x = `2013 Rank`, y = `2020 Rank`)) +
     labs(title = "Dog Breed Rankings 2013 vs 2020" )
 
 ```
+
+The graph compares the dog breed rankings from the year 2013 to the year 2020. The red slope line attemps to highlight how the ranking between each year doesn't change much. It would be interesting to learn more about which specific breeds are farther away from this trendline.
