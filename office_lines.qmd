@@ -1,0 +1,15 @@
+---
+title: "Lines in the Office"
+format: html
+execute: 
+  warning: false 
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+office_lines <- read.csv("the-office_lines.csv")
+View(office_lines)
+```
