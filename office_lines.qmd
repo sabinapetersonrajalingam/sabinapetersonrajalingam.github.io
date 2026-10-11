@@ -13,7 +13,7 @@ library(ggplot2)
 office_lines <- read.csv("the-office_lines.csv")
 ```
 
-
+Counting the number of lines each character has in total.
 ```{r}
 office_lines |>
   group_by(Character) |>
@@ -37,6 +37,6 @@ office_lines |>
 office_lines |>
   mutate(new_company = str_replace_all(Line, "Dunder Mifflin", "Blunder Muffin")) |>
   filter(str_detect(new_company, "Blunder Muffin")) |>
-  select(Character, new_company) |> 
-  head(3)
+  select(new_company) |> 
+  head(2)
 ```
