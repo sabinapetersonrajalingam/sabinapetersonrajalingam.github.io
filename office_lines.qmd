@@ -16,7 +16,7 @@ office_lines <- read.csv("the-office_lines.csv")
 1. The code below gives you a ranking of each character, calculating the length of lines for each character from The Office. I calculated the length of each line for each character and the summed up the length of all of their lines. 
 
 ```{r}
-office_lines |>
+office_lines_changed <- office_lines |>
   group_by(Character) |>
   mutate(line_length = str_length(Line))|>
   summarize(total_length = sum(line_length, na.rm = TRUE)) |>
@@ -41,4 +41,50 @@ office_lines |>
   filter(str_detect(new_company, "Blunder Muffin")) |>
   select(new_company) |> 
   head(2)
+```
+
+
+```{r}
+office_lines |>
+  mutate(jim_string = (str_extract(Line, "(?<=Dwight )[^.?]+"))) |>
+  na.omit() |>
+  select(jim_string)|>
+  head(4)
+```
+
+
+```{r}
+office_lines |>
+  summarize(jam_count = sum(str_detect(Line, "Jim.+Pam"), na.rm = TRUE)) 
+```
+
+
+```{r}
+office_lines_changed <- office_lines_changed |>
+  mutate(Character = fct_lump(Character, n = 5, w = total_length))
+  
+office_lines_changed <- office_lines_changed |> 
+  mutate(Character = fct_reorder(Character, total_length, .desc = TRUE))
+
+ggplot(office_lines_changed, aes(x = Character, y = total_length, fill = Character))+
+  geom_col() +
+  labs(
+    y = "Total Length of Lines",
+    title = "Total Length of Lines of Characters \n in The Office"
+  )
+```
+
+
+
+```{r}
+office_lines_dwight <- office_lines |>
+  group_by(Season) |>
+  summarize(dwight_string = sum(str_detect(Line, "Dwight"))) 
+
+ggplot(office_lines_dwight, aes(x = Season, y = dwight_string, fill = Season))+
+  geom_col()+
+  labs(
+    y = "'Dwight' Mentions",
+    title = "How Often is 'Dwight' Mentioned in \n Each Season?"
+  )
 ```
