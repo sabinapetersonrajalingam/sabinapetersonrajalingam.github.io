@@ -13,7 +13,8 @@ library(ggplot2)
 office_lines <- read.csv("the-office_lines.csv")
 ```
 
-Counting the number of lines each character has in total.
+1. The code below gives you a ranking of each character, calculating the length of lines for each character from The Office. I calculated the length of each line for each character and the summed up the length of all of their lines. 
+
 ```{r}
 office_lines |>
   group_by(Character) |>
@@ -23,6 +24,7 @@ office_lines |>
   head(10)
 ```
 
+2. One of the most common phrases that is repeated in The Office is "That's what she said." The main character Michael often repeats this innapropriate joke and I wanted to count how many times this joke was repeated by each character. First I found it helpful to change each string to all lower case and then use a regular expression brackets to choose either a straight or curly apostrophe. 
 
 ```{r}
 office_lines |>
