@@ -11,5 +11,32 @@ library(tidyverse)
 library(ggplot2)
 
 office_lines <- read.csv("the-office_lines.csv")
-View(office_lines)
+```
+
+
+```{r}
+office_lines |>
+  group_by(Character) |>
+  mutate(line_length = str_length(Line))|>
+  summarize(total_length = sum(line_length, na.rm = TRUE)) |>
+  arrange(desc(total_length)) |>
+  head(10)
+```
+
+
+```{r}
+office_lines |>
+  mutate(Line = str_to_lower(Line))|>
+  group_by(Character) |>
+  summarize(exclaim_counter = sum(str_count(Line, "that['’]s what she said")))|>
+  arrange(desc(exclaim_counter))
+```
+
+
+```{r}
+office_lines |>
+  mutate(new_company = str_replace_all(Line, "Dunder Mifflin", "Blunder Muffin")) |>
+  filter(str_detect(new_company, "Blunder Muffin")) |>
+  select(Character, new_company) |> 
+  head(3)
 ```

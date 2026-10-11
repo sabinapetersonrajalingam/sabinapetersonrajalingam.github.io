@@ -32,6 +32,6 @@
     "href": "office_lines.html",
     "title": "Lines in the Office",
     "section": "",
-    "text": "library(tidyverse)\nlibrary(ggplot2)\n\noffice_lines &lt;- read.csv(\"the-office_lines.csv\")\nView(office_lines)"
+    "text": "library(tidyverse)\nlibrary(ggplot2)\n\noffice_lines &lt;- read.csv(\"the-office_lines.csv\")\n\n\noffice_lines |&gt;\n  group_by(Character) |&gt;\n  mutate(line_length = str_length(Line))|&gt;\n  summarize(total_length = sum(line_length, na.rm = TRUE)) |&gt;\n  arrange(desc(total_length)) |&gt;\n  head(10)\n\n# A tibble: 10 × 2\n   Character total_length\n   &lt;chr&gt;            &lt;int&gt;\n 1 Michael         922201\n 2 Dwight          491222\n 3 Jim             355306\n 4 Andy            274622\n 5 Pam             268063\n 6 Angela           85806\n 7 Kevin            81688\n 8 Erin             76980\n 9 Oscar            75551\n10 Ryan             73967\n\n\n\noffice_lines |&gt;\n  mutate(Line = str_to_lower(Line))|&gt;\n  filter(Character == \"Michael\") |&gt;\n  summarize(sum(str_count(Line, \"what she said\"), na.rm = TRUE))\n\n  sum(str_count(Line, \"what she said\"), na.rm = TRUE)\n1                                                  22"
   }
 ]
