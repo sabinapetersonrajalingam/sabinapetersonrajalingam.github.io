@@ -143,6 +143,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./simpson_episodes.html">
  <span class="dropdown-text">Simpsons Episodes</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./office_lines.html">
+ <span class="dropdown-text">Office Lines</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -165,7 +169,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Simpson Episodes</h1>
-<p class="subtitle lead">This dataset is a Simpsons Dataset from Kaggle which was made available to the public by Prashant Banerjee. Thank you to Nicolas Foss, Ed.D., MS with Iowa HHS who curated the data set.</p>
 </div>
 
 
@@ -182,9 +185,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Link to Original Dataset: https://www.kaggle.com/datasets/prashant111/the-simpsons-dataset</p>
-<p>Link to Github: https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-02-04</p>
 <p>This data set analyzes the episodes from the TV show The Simpsons. Episodes and script lines have been filtered to only include episodes from 2010 to 2016. The data contains information about the imdb rating, voting, number in the series, season, title, views, and more.</p>
+<p>This dataset is a <a href="https://www.kaggle.com/datasets/prashant111/the-simpsons-dataset">Simpsons Dataset from Kaggle</a> which was made available to the public by Prashant Banerjee. Thank you to Nicolas Foss, Ed.D., MS with Iowa HHS who curated the data set in linked in <a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-02-04">TidyTuesday</a></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>

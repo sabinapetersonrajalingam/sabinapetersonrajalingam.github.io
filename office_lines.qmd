@@ -1,10 +1,13 @@
 ---
-title: "Lines in the Office"
+title: "The Office Quotes"
 format: html
 execute: 
   warning: false 
   message: false
 ---
+This data set has information on all of the lines spoken in the American sitcom show, The Office. The data set tracks all lines from all 9 seasons and includes the season, episode, line, character who spoke the line, and what number line it was in the entire show. In total there are 61,306 lines!
+
+This dataset has been created by [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines) and was originally scraped from a website called [Office Quotes](www.officequotes.net) that is currently down.
 
 ```{r}
 library(tidyverse)
@@ -12,6 +15,8 @@ library(ggplot2)
 
 office_lines <- read.csv("the-office_lines.csv")
 ```
+ 
+
 
 1. The code below gives you a ranking of each character, calculating the length of lines for each character from The Office. I calculated the length of each line for each character and the summed up the length of all of their lines. 
 
@@ -24,6 +29,9 @@ office_lines_changed <- office_lines |>
   head(10)
 ```
 
+---
+
+
 2. One of the most common phrases that is repeated in The Office is "That's what she said." The main character Michael often repeats this innapropriate joke and I wanted to count how many times this joke was repeated by each character. First I found it helpful to change each string to all lower case and then use a regular expression brackets to choose either a straight or curly apostrophe. 
 
 ```{r}
@@ -35,6 +43,11 @@ office_lines |>
 ```
 
 
+---
+
+
+3. In The Office, the paper company the characters all work for is called "Dunder Mifflin" which sounds an awful lot like "Blunder Muffin" to me. What is we changed the company line to something more funny?
+
 ```{r}
 office_lines |>
   mutate(new_company = str_replace_all(Line, "Dunder Mifflin", "Blunder Muffin")) |>
@@ -43,6 +56,10 @@ office_lines |>
   head(2)
 ```
 
+---
+
+
+4. One of my favorite characters is Dwight Schrute. He is known as one of the most comedic characters in the show. Using lookarounds, I wrote code to see what the characters talk about when he is mentioned. Some examples are shown below.
 
 ```{r}
 office_lines |>
@@ -52,11 +69,18 @@ office_lines |>
   head(4)
 ```
 
+---
+
+
+5. The great love story of the sitcom is the story of Jim and Pam. In this code I used str_detect to count how many times they are mentioned together in a line.
 
 ```{r}
 office_lines |>
   summarize(jam_count = sum(str_detect(Line, "Jim.+Pam"), na.rm = TRUE)) 
 ```
+
+
+---
 
 
 ```{r}
@@ -70,11 +94,15 @@ ggplot(office_lines_changed, aes(x = Character, y = total_length, fill = Charact
   geom_col() +
   labs(
     y = "Total Length of Lines",
-    title = "Total Length of Lines of Characters \n in The Office"
+    title = "Total Length of Lines of Characters in The Office"
   )
 ```
 
+6. PLOT 1: Length of Lines of Characters in The Office
+If you wanted to see how big of a role each character has in The Office throughout all 9 seasons, one way to track this could be to calculate the length of their lines. This plot above calculates the total length of all of each characters lines in terms of the physical length of each word in their lines. From this plot we can see that Michael, the main character, speaks the most. I was surprised to see that Andy spoke more than Pam because I always thought Pam was one of the more prevelant characters in the show. The pink other column represents all of the other characters in the show who had smaller roles. Some of those characters include Kevin, Angela, Phyllis, and more.
 
+
+---
 
 ```{r}
 office_lines_dwight <- office_lines |>
@@ -85,6 +113,10 @@ ggplot(office_lines_dwight, aes(x = Season, y = dwight_string, fill = Season))+
   geom_col()+
   labs(
     y = "'Dwight' Mentions",
-    title = "How Often is 'Dwight' Mentioned in \n Each Season?"
+    title = "How Often is 'Dwight' Mentioned in Each Season?"
   )
 ```
+
+7. PLOT 2: How Often is Dwight Mentioned in Each Season?
+
+Using concept of tracking the times Dwight is mentioned in the Office, I plotted how many times Dwight is mentioned in each season. This gives us insight to how often the other characters talk about Dwight each season. With this data we can see that generally over time his popularity in the show increases. Although in season 2 and 3 Dwight is mentioned a lot more than in Season 4, 6, and 7. It would be interested to compare the data of all of the other characters and see which seasons highlight individual plots for each character. Maybe Dwight is mentioned less in Season 4 because Jim and Pam start dating then and are mentioned more by other characters. 

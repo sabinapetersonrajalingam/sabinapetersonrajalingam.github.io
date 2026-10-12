@@ -143,6 +143,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./simpson_episodes.html">
  <span class="dropdown-text">Simpsons Episodes</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./office_lines.html">
+ <span class="dropdown-text">Office Lines</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -165,7 +169,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Breed Rankings</h1>
-<p class="subtitle lead">The data comes from the American Kennel Club and from KKakey.</p>
 </div>
 
 
@@ -182,9 +185,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Link to Original Data:</p>
-<p>Link to Github: https://github.com/rfordatascience/tidytuesday/tree/main/data/2022/2022-02-01</p>
 <p>The Breed Rank data gives information about different types of breek ranks. The specific dataset called breed_rank_all gives information about the ranking of each dog breed recorded from the years 2013 to 2020. There are 195 different types of breeds that this data set contains.</p>
+<p>This data set is a <a href="https://github.com/kkakey/dog_traits_AKC/blob/main/README.md">Breed Rankings Dataset from Kkakey</a> courtesy of <a href="https://www.akc.org/">American Kennel Club</a>. This data has been made available by KKakey through the <a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2022/2022-02-01">TidyTuesday Data Link</a></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>

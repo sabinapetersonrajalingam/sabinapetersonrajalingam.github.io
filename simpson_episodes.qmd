@@ -1,17 +1,14 @@
 ---
 title: "Simpson Episodes"
-subtitle: "This dataset is a Simpsons Dataset from Kaggle which was made available to the public by Prashant Banerjee. Thank you to Nicolas Foss, Ed.D., MS with Iowa HHS who curated the data set."
-
 execute: 
   warning: false 
   message: false
 ---
-Link to Original Dataset: 
-https://www.kaggle.com/datasets/prashant111/the-simpsons-dataset
-
-Link to Github: https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-02-04
 
 This data set analyzes the episodes from the TV show The Simpsons. Episodes and script lines have been filtered to only include episodes from 2010 to 2016. The data contains information about the imdb rating, voting, number in the series, season, title, views, and more.
+
+This dataset is a [Simpsons Dataset from Kaggle](https://www.kaggle.com/datasets/prashant111/the-simpsons-dataset) which was made available to the public by Prashant Banerjee. Thank you to Nicolas Foss, Ed.D., MS with Iowa HHS who curated the data set in linked in [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-02-04)
+
 
 ```{r}
 library(tidyverse)
