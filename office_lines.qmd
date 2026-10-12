@@ -1,6 +1,7 @@
 ---
 title: "The Office Quotes"
 format: html
+code-fold: true
 execute: 
   warning: false 
   message: false
@@ -10,6 +11,7 @@ This data set has information on all of the lines spoken in the American sitcom 
 This dataset has been created by [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines) and was originally scraped from a website called [Office Quotes](www.officequotes.net) that is currently down.
 
 ```{r}
+
 library(tidyverse)
 library(ggplot2)
 
