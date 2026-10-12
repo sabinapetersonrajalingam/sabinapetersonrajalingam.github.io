@@ -8,7 +8,8 @@ execute:
 ---
 This data set has information on all of the lines spoken in the American sitcom show, The Office. The data set tracks all lines from all 9 seasons and includes the season, episode, line, character who spoke the line, and what number line it was in the entire show. In total there are 61,306 lines!
 
-This dataset has been created by [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines) and was originally scraped from a website called [Office Quotes](www.officequotes.net) that is currently down.
+This dataset has been created by [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines) and was originally scraped from a website called [Office Quotes](https://www.officequotes.net/) that is currently down.
+
 
 ```{r}
 
