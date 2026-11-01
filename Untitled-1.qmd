@@ -1,0 +1,18 @@
+---
+title: "Air Quality"
+format: html
+code-fold: true
+execute: 
+  warning: false 
+  message: false
+---
+The UK Weather data set explores climate data such as mean daily minimum and maximum temperatures, total rainfall, total sunshine hours and days of frost for each month in each year starting from 1941. The Historic UK Meteorological & Climate Data has been provided by the [UK Met Office](https://www.metoffice.gov.uk/) which is the national weather service in the UK. Thank you to [Jack Davison](https://github.com/jack-davison) who scraped the data and published it to [Tidy Tuesday](https://rfordatascience.github.io/tidytuesday/data/2025/2025-10-21/readme.html)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+UK_weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv')
+```
+
+
