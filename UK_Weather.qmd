@@ -15,4 +15,5 @@ library(ggplot2)
 UK_weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv')
 ```
 
+In the UK, the summers are often warm, however within the past few years there have been record high temperatures during the month of July. I thought it would be interesting to uncover the data from the month of July from an earlier range of years to a later range. 
 
