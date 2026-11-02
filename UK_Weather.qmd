@@ -12,8 +12,56 @@ The UK Weather data set explores climate data such as mean daily minimum and max
 library(tidyverse)
 library(ggplot2)
 
-UK_weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv')
+uk_weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv')
 ```
 
-In the UK, the summers are often warm, however within the past few years there have been record high temperatures during the month of July. I thought it would be interesting to uncover the data from the month of July from an earlier range of years to a later range. 
+In the UK, the summers are often warm, however within the past few years there have been record high temperatures during the month of July. I thought it would be interesting to uncover the data from the month of July throughout a range of years. 
 
+
+```{r}
+heathrow_july <- uk_weather |>
+  filter(station == "heathrow", month == 7) |>
+  select(station, month, year, tmax, rain)
+
+ggplot(heathrow_july, aes(x = tmax, y = rain))+
+  geom_point() +
+  labs(
+    title = "Heathrow Rainfall vs Max Temperature \n in July 1948-2024",
+    x = "Maximum Temperature", 
+    y = "Rainfall" 
+    )
+```
+
+```{r}
+shuffling <- function(num, dataframe){
+  dataframe |>
+    mutate(shuffle_tmax = sample(tmax))
+}
+shuffled_heathrow <- map(1:1000, shuffling, dataframe = heathrow_july) |>
+list_rbind()
+
+shuffled_heathrow |>
+  ggplot(aes(x = shuffle_tmax)) +
+  geom_histogram(binwidth = 0.02) +
+  labs(
+  )
+
+```
+
+
+
+
+
+```{r}
+lerwick_july <- uk_weather |>
+  filter(station == "lerwick", month == 7) |>
+  select(station, month, year, tmax, rain)
+
+ggplot(lerwick_july, aes(x = tmax, y = rain))+
+  geom_point() +
+  labs(
+    title = "Lerwick Rainfall vs Max Temperature \n in July 1948-2024", 
+    x = "Maximum Temperature", 
+    y = "Rainfall"
+    )
+```
