@@ -11,6 +11,7 @@ The UK Weather data set explores climate data such as mean daily minimum and max
 ```{r}
 library(tidyverse)
 library(ggplot2)
+library(reprex)
 
 uk_weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv')
 ```
@@ -21,7 +22,7 @@ In the UK, the summers are often warm, however within the past few years there h
 ```{r}
 heathrow_july <- uk_weather |>
   filter(station == "heathrow", month == 7) |>
-  select(station, month, year, tmax, rain)
+  select(station, month, year, tmax, rain) 
 
 ggplot(heathrow_july, aes(x = tmax, y = rain))+
   geom_point() +
@@ -30,6 +31,14 @@ ggplot(heathrow_july, aes(x = tmax, y = rain))+
     x = "Maximum Temperature", 
     y = "Rainfall" 
     )
+```
+
+
+```{r}
+correlation_heathrow <- heathrow_july |>
+  summarize(r = cor(tmax, rain)) |>
+  pull(r)
+correlation_heathrow
 ```
 
 ```{r}
@@ -43,12 +52,11 @@ list_rbind()
 shuffled_heathrow |>
   ggplot(aes(x = shuffle_tmax)) +
   geom_histogram(binwidth = 0.02) +
+  geom_vline(xintercept = correlation_heathrow, color = "red", linewidth = 1)+
   labs(
+
   )
-
 ```
-
-
 
 
 
@@ -64,4 +72,12 @@ ggplot(lerwick_july, aes(x = tmax, y = rain))+
     x = "Maximum Temperature", 
     y = "Rainfall"
     )
+```
+
+
+```{r}
+correlation_lerwick <- lerwick_july |>
+  summarize(r = cor(tmax, rain)) |>
+  pull(r)
+correlation_lerwick
 ```
