@@ -7,6 +7,7 @@ execute:
   message: false
 ---
 ## Introduction
+
 The UK Weather data set explores climate data such as mean daily minimum and maximum temperatures, total rainfall, total sunshine hours and days of frost for each month in each year starting from 1941. The Historic UK Meteorological & Climate Data has been provided by the [UK Met Office](https://www.metoffice.gov.uk/) which is the national weather service in the UK. Thank you to [Jack Davison](https://github.com/jack-davison) who scraped the data and published it to [Tidy Tuesday](https://rfordatascience.github.io/tidytuesday/data/2025/2025-10-21/readme.html)
 
 ```{r}
@@ -18,11 +19,12 @@ uk_weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 ```
 
 
-In the UK, the weather is varied: some months bring very high temperatures, while others are cold. The UK is also known for high levels of precipitation. July is known to be one of the months whose weather has changed the most over the years. Using weather data from the 1940s to the 2020s from several weather stations around the UK, I hope to compare rainfall with maximum temperature in July of each year. So, my research question is: Is there a correlation between maximum temperature and total rainfall in July?
+In the UK, the weather is varied: some months bring very high temperatures, while others are cold. The UK is also known for high levels of precipitation. July is known to be one of the months whose weather has changed the most over the years. Using weather data from the 1940s to the 2020s from several weather stations around the UK, I hope to compare rainfall with maximum temperature in July of each year. My research question: Is there a correlation between maximum temperature and total rainfall in July?
 
-To understand this question I have chosen to focus on two stations: Heathrow and Lerwick. Heathrow is a station that is not far out of central London whereas Lerwick is the most northern station in the UK. I thought it would be interesting to compare the data of these two stations.
+To understand this question, I have chosen to focus on two stations: Heathrow and Lerwick. Heathrow is a station that is not far from central London, whereas Lerwick is the most northern station in the UK. I thought it would be interesting to compare the data of these two stations.
 
 ## Station Heathrow 
+
 
 ##### Welcome to Heathrow! 
 
@@ -51,13 +53,16 @@ correlation_heathrow <- heathrow_july |>
   summarize(r = cor(tmax, rain)) |>
   pull(r)
 cat("The calculated correlation between rainfall and maximum temperature at Heathrow station is: ", correlation_heathrow)
+
 ```
 
 
 
-## Shuffling
+## Hypothesis Testing
 
-First to begin our investigation of how the correlation changes as we shuffle the data points, we have to create functions that we can iterate to give us the shuffle data frame we want. 
+To begin our investigation of the research question, we need to test the null hypothesis. In this scenario, we are testing whether or not the rainfall and maximum temperature happen just by random chance or if they are correlated.
+
+ First to begin our investigation of how the correlation changes as we shuffle the data points, we have to create functions that we can iterate to give us the shuffle data frame we want. 
 
 The first function that I have created is called shuffle points. The shuffle points function intends to take in a data frame and then shuffle the tmax temperatures from that dataset. The function will return the data frame with a new column called shuffle_temp with the shuffled values.
 
@@ -77,7 +82,7 @@ shuffle_correlation <- function(num, dataframe){
 ```
 
 
-## Applying Shuffling to Heathrow Data
+## Applying Hypothesis Testing to Heathrow Data
 
 ```{r}
 set.seed(47)
@@ -92,11 +97,12 @@ ggplot(shuffle_plot_heathrow, aes(x = shuffle_temp, y = rain)) +
   )
 ```
 
+The plot above represents the shuffled maximum temperatures vs the rainfall. In simple terms, this means that the assigned maximum temperatures have been shuffled randomly. In the graph above we can see that the shuffled temperatures don't have a similar negative correlation as the original graph. However, we can't infer correlation with 1 variation of the shuffled temperatures. To understanding more we need to map the shuffle function multiple times.
 
 ```{r}
 set.seed(47)
 shuffled_heathrow <- map(1:1000, shuffle_correlation, dataframe = heathrow_july)|>
-list_rbind()
+list_rbind()   
 
 shuffled_heathrow |>
   ggplot(aes(x = correlation)) +
@@ -118,8 +124,7 @@ shuffled_heathrow |>
   )
 ```
 
-
-
+The plot above shows the mapped correlation values for rainfall and maximum temperature in July at Heathrow Station. The red line represents the original observed correlation value which was caculated to be -0.483
 
 
 
@@ -140,6 +145,13 @@ ggplot(lerwick_july, aes(x = tmax, y = rain))+
     )
 ```
 
+
+```{r}
+correlation_lerwick <- lerwick_july |>
+  summarize(r = cor(tmax, rain)) |>
+  pull(r)
+cat("The calculated correlation between rainfall and maximum temperature at Lerwick station is: ", correlation_lerwick)
+```
 
 ## Applying Shuffling to Lerwick Data
 ```{r}
