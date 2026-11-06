@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>uk_weather <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>In the UK, the weather is varied: some months bring very high temperatures, while others are cold. The UK is also known for high levels of precipitation. July is known to be one of the months whose weather has changed the most over the years. Using weather data from the 1940s to the 2020s from several weather stations around the UK, I hope to compare rainfall with maximum temperature in July of each year. The study of rainfall is interesting to me because rainfall can occur when hot and when cold. Much of my extended family lives near the equator and they experience hot rain often. However, rain also can occur at very low temperatures. So how can we begin to understand this relationship?</p>
+<p>In the UK, the weather is varied: some months bring very high temperatures, while others are cold. July is known to be one of the months whose weather has changed the most over the years. Using weather data from the 1940s to the 2020s from several weather stations around the UK, I hope to compare rainfall with maximum temperature in July of each year. Rain can occur at both low and high temperatures, how can we begin to understand this relationship?</p>
 <p>My research question: Is there a correlation between maximum temperature and total rainfall in July?</p>
 <p>To understand this question, I have chosen to focus on two stations: Heathrow and Lerwick. Heathrow is a station that is not far from central London, whereas Lerwick is the most northern station in the UK. I thought it would be interesting to compare the data of these two stations.</p>
 </section>
@@ -266,9 +266,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="hypothesis-testing" class="level2">
 <h2 class="anchored" data-anchor-id="hypothesis-testing">Hypothesis Testing</h2>
 <p>To begin our investigation of the research question, we need to test the null hypothesis. In this scenario, we are testing whether or not the rainfall and maximum temperature happen just by random chance or if they are correlated.</p>
-<p>First to begin our investigation of how the correlation changes as we shuffle the data points, we have to create functions that we can iterate to give us the shuffle data frame we want.</p>
-<p>The first function, shuffle_points() takes in a data frame and then shuffles the tmax temperatures from that dataset. The function will return the data frame with a new column called shuffle_temp with the shuffled values.</p>
-<p>The second function, shuffle_correlation(), takes in a data frame, randomly shuffles the maximum temperatures, and calculates one correlation between the shuffled temperatures and the rainfall. I set a seed before each simulation of both functions so the results are the same every time the code is run.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -284,6 +281,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>The first function, shuffle_points() takes in a data frame and then shuffles the tmax temperatures from that dataset. The function will return the data frame with a new column called shuffle_temp with the shuffled values.</p>
+<p>The second function, shuffle_correlation(), takes in a data frame, randomly shuffles the maximum temperatures, and calculates one correlation between the shuffled temperatures and the rainfall. I set a seed before each simulation of both functions so the results are the same every time the code is run.</p>
 </section>
 <section id="applying-hypothesis-testing-to-heathrow-data" class="level2">
 <h2 class="anchored" data-anchor-id="applying-hypothesis-testing-to-heathrow-data">Applying Hypothesis Testing to Heathrow Data</h2>
@@ -311,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Figure 2 represents the shuffled maximum temperatures vs the rainfall when the temperatures are shuffled once. In simple terms, this means that the assigned maximum temperatures have been shuffled randomly. In the graph above we can see that the shuffled temperatures don’t have a similar negative correlation as the original graph. However, we can’t infer correlation with 1 variation of the shuffled temperatures. To understand more we need to map the shuffle function multiple times. By mapping we are iterating this shuffling correlation function a thousand times which will give us lots of data points.</p>
+<p>Figure 2 represents the shuffled maximum temperatures vs the rainfall when the temperatures are shuffled once. In simple terms, this means that the assigned maximum temperatures have been shuffled randomly. In the graph above we can see that the shuffled temperatures don’t have a similar negative correlation as the original graph. To understand more we need to map the shuffle function multiple times. By mapping we are iterating this shuffling correlation function a thousand times which will give us lots of data points.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -348,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Figure 3 represents the mapped correlation values for rainfall and maximum temperature in July at Heathrow Station. The mapping line of code applies the shuffle_correlation function a thousand times which shuffles the temperatures a thousand times and then spits out 1 correlation value. Figure 3 graphs all of those correlation values in a histogram. As we can see, the red line on the left is far from the correlation values. The red line represents the original observed correlation value which was calculated to be -0.483. Since the correlation is far from the correlation calculated by the random shuffling temperature, we can make the conclusion that there is a negative correlation between rainfall and maximum temperature in July: As maximum temperature increases in July, the rainfall decreases.</p>
+<p>Figure 3 represents the mapped correlation values for rainfall and maximum temperature in July at Heathrow Station. The mapping line of code applies the shuffle_correlation function a thousand times which shuffles the temperatures a thousand times and then spits out 1 correlation value for each shuffle. As we can see, the red line to the left of the histogram is far from the correlation values. The red line represents the original observed correlation value which was calculated to be -0.483. Since the correlation is far from the correlation calculated by the random shuffling temperature, we can make the conclusion that there is a negative correlation: As maximum temperature increases in July, the rainfall decreases.</p>
 <section id="p-value" class="level4">
 <h4 class="anchored" data-anchor-id="p-value">P-Value</h4>
 <div class="cell">
@@ -473,7 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>While the process of mapping and iterating the shuffle function was similar to the Heathrow Data, Figure 6 illustrates how the relationship between temperature and rainfall was different in the two stations. The red correlation value which is -0.059 overlaps with correlation of shuffled temperatures vs rainfall. Unlike Figure 3, we are unable to make the conclusion that there is a distinct relationship between rainfall and maximum temperature because the correlation falls in the region where randomness could have occurred. Not only does it fall in the region, but it is less than 0.1 off of the most central and peak part of the graph. Since the correlation values falls in this region, we need more information/cannot make a conclusion that these two variables depend on each other directly.</p>
+<p>While the process of mapping and iterating the shuffle function was similar to the Heathrow Data, Figure 6 illustrates how the relationship between temperature and rainfall was different in the two stations. The red correlation value which is -0.059 overlaps with correlation of shuffled temperatures vs rainfall. Unlike Figure 3, we are unable to make the conclusion that there is a distinct relationship between rainfall and maximum temperature because the correlation falls in the region where randomness could have occurred - less than 0.1 away from the peak. Since the correlation values falls in this region, we need more information/cannot make a conclusion that these two variables depend on each other directly.</p>
 <section id="p-value-1" class="level4">
 <h4 class="anchored" data-anchor-id="p-value-1">P-Value</h4>
 <div class="cell">
@@ -494,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>My original research question was intended to investigate if there has been a relationship between rainfall and maximum temperature in the UK from years 1948-2024 in the month of July. Using two stations far from each other I was able to find different results. In the Heathrow Station, there was a correlation between rainfall and maximum temperature in July. Generally as the maximum temperature increased, the rainfall decreased. The observed data shows a correlation or association, not necessarily a causation. When performing hypothesis testing, we reject the null hypothesis. However, Lerwick Station was quite different. There was no strong correlation between rainfall and maximum temperature and therefore we fail to reject the null hypothesis. In other words, the observed correlation is consistent with the correlation that random shuffling produces.</p>
+<p>My original research question was intended to investigate if there has been a relationship between rainfall and maximum temperature in the UK from 1930s-2024 in the month of July. Using two stations far from each other I was able to find different results. In the Heathrow Station, there was a correlation between rainfall and maximum temperature in July. Generally as the maximum temperature increased, the rainfall decreased. The observed data shows a correlation or association, not necessarily a causation. When performing hypothesis testing, we reject the null hypothesis. However, Lerwick Station was quite different. There was no strong correlation between rainfall and maximum temperature and therefore we fail to reject the null hypothesis. In other words, the observed correlation is consistent with the correlation that random shuffling produces.</p>
 
 
 </section>
