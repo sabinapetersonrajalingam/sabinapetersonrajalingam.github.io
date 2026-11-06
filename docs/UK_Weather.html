@@ -174,7 +174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">Hypothesis Testing</a></li>
   <li><a href="#applying-hypothesis-testing-to-heathrow-data" id="toc-applying-hypothesis-testing-to-heathrow-data" class="nav-link" data-scroll-target="#applying-hypothesis-testing-to-heathrow-data">Applying Hypothesis Testing to Heathrow Data</a></li>
   <li><a href="#lerwick-station" id="toc-lerwick-station" class="nav-link" data-scroll-target="#lerwick-station">Lerwick Station</a></li>
-  <li><a href="#applying-shuffling-to-lerwick-data" id="toc-applying-shuffling-to-lerwick-data" class="nav-link" data-scroll-target="#applying-shuffling-to-lerwick-data">Applying Shuffling to Lerwick Data</a></li>
+  <li><a href="#applying-hypothesis-testing-to-lerwick-data" id="toc-applying-hypothesis-testing-to-lerwick-data" class="nav-link" data-scroll-target="#applying-hypothesis-testing-to-lerwick-data">Applying Hypothesis Testing to Lerwick Data</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -202,26 +203,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>The UK Weather data set explores climate data such as mean daily minimum and maximum temperatures, total rainfall, total sunshine hours and days of frost for each month in each year starting from 1941. The Historic UK Meteorological &amp; Climate Data has been provided by the <a href="https://www.metoffice.gov.uk/">UK Met Office</a> which is the national weather service in the UK. Thank you to <a href="https://github.com/jack-davison">Jack Davison</a> who scraped the data and published it to <a href="https://rfordatascience.github.io/tidytuesday/data/2025/2025-10-21/readme.html">Tidy Tuesday</a></p>
+<p>The UK Weather data set explores climate data such as mean daily minimum and maximum temperatures, total rainfall, total sunshine hours and days of frost for each month in each year from 1930s to 2024. The Historic UK Meteorological &amp; Climate Data has been provided by the <a href="https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data">UK Met Office</a> which is the national weather service in the UK. Thank you to <a href="https://github.com/jack-davison">Jack Davison</a> who scraped the data and published it to <a href="https://rfordatascience.github.io/tidytuesday/data/2025/2025-10-21/readme.html">Tidy Tuesday</a></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reprex)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>uk_weather <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>uk_weather <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-10-21/historic_station_met.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>In the UK, the weather is varied: some months bring very high temperatures, while others are cold. The UK is also known for high levels of precipitation. July is known to be one of the months whose weather has changed the most over the years. Using weather data from the 1940s to the 2020s from several weather stations around the UK, I hope to compare rainfall with maximum temperature in July of each year. My research question: Is there a correlation between maximum temperature and total rainfall in July?</p>
-<p>To understand this question I have chosen to focus on two stations: Heathrow and Lerwick. Heathrow is a station that is not far out of central London whereas Lerwick is the most northern station in the UK. I thought it would be interesting to compare the data of these two stations.</p>
+<p>In the UK, the weather is varied: some months bring very high temperatures, while others are cold. The UK is also known for high levels of precipitation. July is known to be one of the months whose weather has changed the most over the years. Using weather data from the 1940s to the 2020s from several weather stations around the UK, I hope to compare rainfall with maximum temperature in July of each year. The study of rainfall is interesting to me because rainfall can occur when hot and when cold. Much of my extended family lives near the equator and they experience hot rain often. However, rain also can occur at very low temperatures. So how can we begin to understand this relationship?</p>
+<p>My research question: Is there a correlation between maximum temperature and total rainfall in July?</p>
+<p>To understand this question, I have chosen to focus on two stations: Heathrow and Lerwick. Heathrow is a station that is not far from central London, whereas Lerwick is the most northern station in the UK. I thought it would be interesting to compare the data of these two stations.</p>
 </section>
 <section id="station-heathrow" class="level2">
 <h2 class="anchored" data-anchor-id="station-heathrow">Station Heathrow</h2>
 <section id="welcome-to-heathrow" class="level5">
 <h5 class="anchored" data-anchor-id="welcome-to-heathrow">Welcome to Heathrow!</h5>
-<p>If you are traveling to London, England you might land in London Heathrow Airport. It is one of the worlds most busiest aviation hubs. Fun Fact! Did you know that there is in fact a secret terminal called The Windsor where only royal family members, celebrities, and VIP flyers can take off from?</p>
-<p>From the data in the UK weather dataset, here is the scatterplot that helds us understand how rainfall and maximum temperature in the month of July are possibly related.</p>
+<p>If you are traveling to London, England you might land in London Heathrow Airport. It is one of the world’s busiest aviation hubs. Fun Fact! Did you know that there is in fact a secret terminal called <a href="https://www.heathrow.com/heathrow-blog/the-windsor-by-heathrow#">The Windsor</a> where only royal family members, diplomats, and VIP flyers can take off from?</p>
+<p>From the data in the UK weather dataset, here is the scatterplot that helps us understand how rainfall and maximum temperature in the month of July are possibly related.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -234,8 +235,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Heathrow Rainfall vs Max Temperature in July 1948-2024"</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Maximum Temperature (°C)"</span>, </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span> </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>, </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Figure 1"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -245,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Explain the graph:</p>
+<p>Figure 1 illustrates the relationship between maximum temperature in July and rainfall at the Heathrow Station. The general trend shows that as the maximum temperature increases, the rainfall decreases.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -262,10 +265,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="hypothesis-testing" class="level2">
 <h2 class="anchored" data-anchor-id="hypothesis-testing">Hypothesis Testing</h2>
-<p>To begin our investigation of the research question, we need to test the null hypothesis. In this scenario, we are testing whether or not the rainfall and maximum temperature happen just by random chance or if they are correlation.</p>
+<p>To begin our investigation of the research question, we need to test the null hypothesis. In this scenario, we are testing whether or not the rainfall and maximum temperature happen just by random chance or if they are correlated.</p>
 <p>First to begin our investigation of how the correlation changes as we shuffle the data points, we have to create functions that we can iterate to give us the shuffle data frame we want.</p>
-<p>The first function that I have created is called shuffle points. The shuffle points function intends to take in a data frame and then shuffle the tmax temperatures from that dataset. The function will return the data frame with a new column called shuffle_temp with the shuffled values.</p>
-<p>The second function I have created is to help visualize the different correlations of these shuffle data points. The shuffle correlation function takes in a data frame and samples the maximum temperature again (we have to be careful to set the seed before calling each function so that it maintains the order), and then calculates the correlation for each shuffled temperature and subsequent rain value.</p>
+<p>The first function, shuffle_points() takes in a data frame and then shuffles the tmax temperatures from that dataset. The function will return the data frame with a new column called shuffle_temp with the shuffled values.</p>
+<p>The second function, shuffle_correlation(), takes in a data frame, randomly shuffles the maximum temperatures, and calculates one correlation between the shuffled temperatures and the rainfall. I set a seed before each simulation of both functions so the results are the same every time the code is run.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -277,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>shuffle_correlation <span class="ot">&lt;-</span> <span class="cf">function</span>(num, dataframe){</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  dataframe <span class="sc">|&gt;</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">shuffle_tmax =</span> <span class="fu">sample</span>(tmax))<span class="sc">|&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(shuffle_tmax, rain))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(shuffle_tmax, rain))</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
@@ -295,8 +298,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Heathrow Rainfall vs. Shuffled Max Temperature"</span>,</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Shuffled Max Temperature (°C)"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Figure 2"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -306,13 +311,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The plot above represents the shuffled maximum temperatures vs the rainfall. In simple terms, this means that the assigned maximum temperatures have been shuffled randomly. In the graph above we can see that the shuffled temperatures don’t have a similar negative correlation as the original graph. However, we can’t infer correlation with 1 variation of the shuffled temperatures. To understanding more we need to map the shuffle function multiple times.</p>
+<p>Figure 2 represents the shuffled maximum temperatures vs the rainfall when the temperatures are shuffled once. In simple terms, this means that the assigned maximum temperatures have been shuffled randomly. In the graph above we can see that the shuffled temperatures don’t have a similar negative correlation as the original graph. However, we can’t infer correlation with 1 variation of the shuffled temperatures. To understand more we need to map the shuffle function multiple times. By mapping we are iterating this shuffling correlation function a thousand times which will give us lots of data points.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>shuffled_heathrow <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, shuffle_correlation, <span class="at">dataframe =</span> heathrow_july)<span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list_rbind</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list_rbind</span>()   </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>shuffled_heathrow <span class="sc">|&gt;</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> correlation)) <span class="sc">+</span></span>
@@ -330,8 +335,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Correlation of Shuffled Temperature vs Rainfall at Heathrow"</span>, </span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature and Rainfall Correlation"</span>,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Shuffles"</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Shuffles"</span>, </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Figure 3"</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -341,94 +348,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
-<section id="lerwick-station" class="level2">
-<h2 class="anchored" data-anchor-id="lerwick-station">Lerwick Station</h2>
+<p>Figure 3 represents the mapped correlation values for rainfall and maximum temperature in July at Heathrow Station. The mapping line of code applies the shuffle_correlation function a thousand times which shuffles the temperatures a thousand times and then spits out 1 correlation value. Figure 3 graphs all of those correlation values in a histogram. As we can see, the red line on the left is far from the correlation values. The red line represents the original observed correlation value which was calculated to be -0.483. Since the correlation is far from the correlation calculated by the random shuffling temperature, we can make the conclusion that there is a negative correlation between rainfall and maximum temperature in July: As maximum temperature increases in July, the rainfall decreases.</p>
+<section id="p-value" class="level4">
+<h4 class="anchored" data-anchor-id="p-value">P-Value</h4>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lerwick_july <span class="ot">&lt;-</span> uk_weather <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(station <span class="sc">==</span> <span class="st">"lerwick"</span>, month <span class="sc">==</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(station, month, year, tmax, rain)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lerwick_july, <span class="fu">aes</span>(<span class="at">x =</span> tmax, <span class="at">y =</span> rain))<span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lerwick Rainfall vs Max Temperature </span><span class="sc">\n</span><span class="st"> in July 1948-2024"</span>, </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Maximum Temperature"</span>, </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall"</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>shuffled_heathrow <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_value =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(correlation) <span class="sc">&gt;=</span> <span class="fu">abs</span>(correlation_heathrow)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1       0</code></pre>
+</div>
+</div>
+<p>The p-value calculated above supports the previous statement that we reject the null hypothesis. Therefore the observed data did not happen just by chance or randomness.</p>
+</section>
+</section>
+<section id="lerwick-station" class="level2">
+<h2 class="anchored" data-anchor-id="lerwick-station">Lerwick Station</h2>
+<p>While Heathrow Station resides just outside of central London, Lerwick is the most northern meteorological station in the UK. As a result, I wondered if the correlation between maximum temperature and rainfall in July would be any different.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lerwick_july <span class="ot">&lt;-</span> uk_weather <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(station <span class="sc">==</span> <span class="st">"lerwick"</span>, month <span class="sc">==</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(station, month, year, tmax, rain)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lerwick_july, <span class="fu">aes</span>(<span class="at">x =</span> tmax, <span class="at">y =</span> rain))<span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lerwick Rainfall vs Max Temperature in July 1931-2024"</span>, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Maximum Temperature (°C)"</span>, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>, </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Figure 4"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="UK_Weather_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="UK_Weather_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Figure 4 above shows a plot of the maximum temperatures during July vs the rainfall measured at Lerwick Station. In comparison to Figure 1 (Heathrow Station), the dots are more scattered and don’t follow a general trend.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>correlation_lerwick <span class="ot">&lt;-</span> lerwick_july <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">r =</span> <span class="fu">cor</span>(tmax, rain)) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(r)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The calculated correlation between rainfall and maximum temperature at Lerwick station is: "</span>, correlation_lerwick)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>correlation_lerwick <span class="ot">&lt;-</span> lerwick_july <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">r =</span> <span class="fu">cor</span>(tmax, rain)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(r)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The calculated correlation between rainfall and maximum temperature at Lerwick station is: "</span>, correlation_lerwick)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>The calculated correlation between rainfall and maximum temperature at Lerwick station is:  -0.05910021</code></pre>
 </div>
 </div>
 </section>
-<section id="applying-shuffling-to-lerwick-data" class="level2">
-<h2 class="anchored" data-anchor-id="applying-shuffling-to-lerwick-data">Applying Shuffling to Lerwick Data</h2>
+<section id="applying-hypothesis-testing-to-lerwick-data" class="level2">
+<h2 class="anchored" data-anchor-id="applying-hypothesis-testing-to-lerwick-data">Applying Hypothesis Testing to Lerwick Data</h2>
+<p>Again, to begin our investigation of the correlation between rainfall and maximum temperature we need to test the null hypothesis. The null hypothesis is the test that there is no relationship between these two variables. We are testing if the values of rainfall and maximum temperature happen just by random chance.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>shuffle_plot_lerwick <span class="ot">&lt;-</span> <span class="fu">shuffle_points</span>(<span class="dv">1</span>, lerwick_july)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(shuffle_plot_lerwick, <span class="fu">aes</span>(<span class="at">x =</span> shuffle_temp, <span class="at">y =</span> rain)) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lerwick Rainfall vs. Shuffled Max Temperature"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Shuffled Max Temperature (°C)"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="UK_Weather_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>shuffled_lerwick <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, shuffle_correlation, <span class="at">dataframe =</span> lerwick_july)<span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list_rbind</span>()</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>shuffled_lerwick <span class="sc">|&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> correlation)) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>) <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> correlation_lerwick, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> correlation_lerwick,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">Inf</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"observed r ="</span>, <span class="fu">round</span>(correlation_lerwick, <span class="dv">3</span>)),</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Correlation of Shuffled Temperature vs Rainfall at Lerwick"</span>, </span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature and Rainfall Correlation"</span>,</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Shuffles"</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>shuffle_plot_lerwick <span class="ot">&lt;-</span> <span class="fu">shuffle_points</span>(<span class="dv">1</span>, lerwick_july)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(shuffle_plot_lerwick, <span class="fu">aes</span>(<span class="at">x =</span> shuffle_temp, <span class="at">y =</span> rain)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lerwick Rainfall vs. Shuffled Max Temperature"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Shuffled Max Temperature (°C)"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rainfall (mm)"</span>, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Figure 5"</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -438,6 +436,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Similar to Figure 2, Figure 5 illustrates the shuffled maximum temperatures vs rainfall in Lerwick Station when the temperatures were shuffled once. However, to investigate the null hypothesis we map the shuffle function of the lerwick data multiple times.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>shuffled_lerwick <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, shuffle_correlation, <span class="at">dataframe =</span> lerwick_july)<span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list_rbind</span>()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>shuffled_lerwick <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> correlation)) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> correlation_lerwick, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> correlation_lerwick,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">Inf</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"observed r ="</span>, <span class="fu">round</span>(correlation_lerwick, <span class="dv">3</span>)),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Correlation of Shuffled Temperature vs Rainfall at Lerwick"</span>, </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature and Rainfall Correlation"</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Shuffles"</span>, </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Figure 6"</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="UK_Weather_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While the process of mapping and iterating the shuffle function was similar to the Heathrow Data, Figure 6 illustrates how the relationship between temperature and rainfall was different in the two stations. The red correlation value which is -0.059 overlaps with correlation of shuffled temperatures vs rainfall. Unlike Figure 3, we are unable to make the conclusion that there is a distinct relationship between rainfall and maximum temperature because the correlation falls in the region where randomness could have occurred. Not only does it fall in the region, but it is less than 0.1 off of the most central and peak part of the graph. Since the correlation values falls in this region, we need more information/cannot make a conclusion that these two variables depend on each other directly.</p>
+<section id="p-value-1" class="level4">
+<h4 class="anchored" data-anchor-id="p-value-1">P-Value</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>shuffled_lerwick <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_value =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(correlation) <span class="sc">&gt;=</span> <span class="fu">abs</span>(correlation_lerwick)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.548</code></pre>
+</div>
+</div>
+<p>According to statistics, if the p value is greater than a value of 0.05, then that data fails to reject the null hypothesis. In this scenario the value of the p value calculated above is 0.548 which is a lot greater than 0.05, and there we cannot reject the idea of randomness.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>My original research question was intended to investigate if there has been a relationship between rainfall and maximum temperature in the UK from years 1948-2024 in the month of July. Using two stations far from each other I was able to find different results. In the Heathrow Station, there was a correlation between rainfall and maximum temperature in July. Generally as the maximum temperature increased, the rainfall decreased. The observed data shows a correlation or association, not necessarily a causation. When performing hypothesis testing, we reject the null hypothesis. However, Lerwick Station was quite different. There was no strong correlation between rainfall and maximum temperature and therefore we fail to reject the null hypothesis. In other words, the observed correlation is consistent with the correlation that random shuffling produces.</p>
 
 
 </section>
