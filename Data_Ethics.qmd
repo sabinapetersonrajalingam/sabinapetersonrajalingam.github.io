@@ -1,9 +1,9 @@
 ---
-title: "ShotSpotter Survelliance on Black and Brown Communities"
+title: "ShotSpotter Surveillance on Black and Brown Communities"
 format: html
 ---
 
-Citation: include mla citation or however it should be cited 
+Citation: 
 
 https://www.soundthinking.com/privacy-policy/
 
@@ -11,38 +11,53 @@ https://www.aclu-wi.org/news/shotspotter-leak-shows-surveillance-tech-used-overp
 
 https://justicetechlab.org/shotspotter-data/
 
+https://wisconsinexaminer.com/2024/02/27/privacy-advocates-respond-to-leaked-data-of-shotspotter-gunshot-detection/
+
+https://www.aclu.org/news/privacy-technology/four-problems-with-the-shotspotter-gunshot-detection-system
+
 
 ### Introduction to Ethical Dilemma 
 
-ShotSpotter is a acoustic gunshot detection technology that identifies the sound of the gunshot, location, and alerts law enforcement agencies. ShotSpotter outlined its Community Privacy Protections emphasizing that the risk for voice surveillance is extremely low.
+ShotSpotter is an acoustic gunshot detection technology that identifies the sound of the gunshot, location, and alerts law enforcement agencies. ShotSpotter outlined its Community Privacy Protections emphasizing that the risk for voice surveillance is extremely low.
 
-Proir to activating the sensors, ShotSpotter works with their clients to determine the location they want to be covered by ShotSpotter, targeting the areas with most gun violence. When the coverage is set, engineers determine exact location of the sensors, police do not have a say in the placement. ShotSpotter sensors are only triggered by an instantaneous, sharp noise and therefore cannot hear human voices. When a noise is detected the audio is sent to a ShotSpotter employee and they confirm whether the sound could be a gunshot. After determining gunfire, police and notified and provided with the recording and location. After the incident recordings are deleted after 30 hours and are only accessible under strict conditions if a gunshot is missed. According to their privacy protections, ShotSpotter is here to provide surveillance that will have social benefits of decrease in gun violence. 
+Prior to activating the sensors, ShotSpotter works with their clients to determine the location they want to be covered by ShotSpotter, targeting the areas with most gun violence. When the coverage is set, engineers determine exact location of the sensors, police do not have a say in the placement. ShotSpotter sensors are only triggered by an instantaneous, sharp noise and therefore cannot hear human voices. When a noise is detected the audio is sent to a ShotSpotter employee and they confirm whether the sound could be a gunshot. After determining gunfire, police are notified and provided with the recording and location. After the incident recordings are deleted after 30 hours and are only accessible under strict conditions if a gunshot is missed. According to their privacy protections, ShotSpotter is here to provide surveillance that will have social benefits of decrease in gun violence. 
 
-In March 2024, the American Civil Liberties Union (ACLU) reported that ShotSpotter technology was being implemented in communities of color significantly more than other communities. Internal documents were leaked to WIRED which exposed the locations of ShotSpotter's nationalwide network of microphones. The ACLU highlights that along with many other cities, in Milwaukee the technology was placed in North and South sides of the city which are majority Latinx and Black commmunities. 
+In March 2024, the American Civil Liberties Union (ACLU) reported that ShotSpotter technology was being implemented in communities of color significantly more than other communities. Internal documents were leaked to WIRED which exposed the locations of ShotSpotter's nationwide network of microphones. The ACLU highlights that along with many other cities, in Milwaukee the technology was placed in North and South sides of the city which are majority Latinx and Black communities. 
 
 In their article, ACLU referenced studies that illustrated how ShotSpotter was highly ineffective as 89% of the gunshot alerts did not lead to police force finding gun-related incidents. Additionally, sensors were triggered by other loud sounds such as fireworks or car back-firing. 
 
 The ACLU argues that the use of ShotSpotter in police force is not only highly ineffective but could lead to dangerous situations especially for Black and Brown communities as they are targeted for surveillance. Instead of investing in inaccurate surveillance technology, they urge police force to invest in public safety solutions that address ongoing issues.
 
-### Understanding the Ethic Considerations
+In another article written by ACLU, Jay Stanley illustrates how increased surveillance in communities of color has led to more frequent searches. As a result, by targeting communities of color there is an increased risk of further violence against communities of color. SAY SOMETHING MORE ABOUT HOW VIOLENCE AGAINST PEOPLE OF COLOR 
+
+There are many parts to the ethical dilemma. One part is whether it is ethical to survey citizens without their consent. The second part of the dilemma is whether or not it is worth investing money into a technology that is mean to protect communities when the outcome is instead targeting and endangering those communities further. The most important part of this dilemma in my opinion is if it ethical to survey a specific community, AGAIN SOMETHING ABOUT INCREASE SURVEILLANCE - LEADING TO MORE VIOLENCE...
+
+### Understanding the Ethical Considerations
 
 1. What was the consent structure for recruiting participants? Were the participants aware of the ways their data would be used for research? Was informed consent possible? Can you provide informed consent for applications that are yet foreseen?
 
-Regular citizens were not informed of the surveillance locations and how it was being used by the police force. While general contracts were disclosed, people were not able to know the specific locations of the ShotSpotter sensors or the audio recording capabilities. As a result, one could argue that the surveillance was a violation of people's privacy. Although in ShotSpotter's privacy protections it states that audio recording is only triggered by a loud instantaneous noise, they did not disclose if human noise could be heard after or during the recording. If people were unaware that their voices could be heard, they did not consent to surveillance. 
+The Wisconsin Examiner investigated the leaked data on ShotSpotter and highlighted how contracts were disclosed and there was a significant increase in money spent on ShotSpotter by the City of Milwaukee from 2010 to 2023. However, some of the contract money was offset by state funding which makes it harder to understand how much money the city spent on ShotSpotter in 2023. While general contracts were disclosed, people were not able to know the specific locations of the ShotSpotter sensors or the audio recording capabilities. As a result, one could argue that the surveillance was a violation of people's privacy. Although in ShotSpotter's privacy protections it states that audio recording is only triggered by a loud instantaneous noise, they did not disclose if human noise could be heard after or during the recording. If people were unaware that their voices could be heard, they did not consent to surveillance. 
 
-Police forcce have disclosed incidents and given information to the timestamp, however the location has been redacted. I imagine that location has been kept secret so that audio sensors are not vandalized and so that police can catch more recordings of gunshots because people do not know they are nearby a sensor. 
-
-In would have potentially been possible for the police force to greater disclose the surveillance to communities with a greater outreach which could have caused drop in gunshots. If people are told they are being surveyed they might take less risk by firing their weapons in public places. 
+Police force have disclosed incidents and given information to the timestamp which can be found in the Justice Tech Lab archives, however the location has been redacted. I imagine that location has been kept secret so that audio sensors are not vandalized and so that police can catch more recordings of gunshots because people do not know they are nearby a sensor. The Wisconsin Examiner supported this theory as they summarized how the department refused to give information on the locations of the sensors because it would hinder the police force's ability to respond to crime and endanger citizens who have agreed to have sensors on their property.
 
 
 2. How were the variables collected? Were they accurately recorded? Is there any missing data?
 
+The variables were collected by ShotSpotter sensors and then sent to the police force. According to ACLU, what was intended to be recorded, gunshots, were in fact not accurately recorded. Most of the data collected were false positives. In other words, the ShotSpotter sensors mistook other loud noises for gunshots and sent police into those locations where no evidence of crime was found. 
+
+Since the ShotSpotter privacy policy has emphasized that their sensors only rely on audio, there is a significant amount of missing data for each report. There is no information on what object has made the sound, how many people were around during the time of the sound and the weather both I imagine could have triggered the sensors in extreme situations give ShotSpotter's description of how audio recordings turn on. There is also missing data on how the ShotSpotter classifies what is a gunshot and what is not. The ShotSpotter privacy protections have written that if a loud noise triggers the recording algorithm that an employee will listen and confirm whether or not the sound is similar to a gunshot. There is missing data on who confirmed the sound and what the sound was like. Since this is a surveillance tool used by police, there are many parts of missing data that the general public is not able to view.
 
 
 3. Who was measured? Are those individuals representative of the people to whom we’d like to generalize / apply the algorithm? Should we analyze data if we do not know how the data were collected?
 
+What was measured was the sound of the alleged gunshot and the location of the sensor. As the ACLU and the Wisconsin Examiner illustrated, the sensors in Milwaukee were more frequently placed in Black and Brown communities. These individuals in the communities with sensors were overrepresented in the data. According to ShotSpotter's privacy protections, the sensors were placed in locations with the gun violence. However, when the locations were leaked, news reporters such as the ACLU and Wisconsin Examiner noticed sensors were not evenly distributed. Therefore, there is missing data on communities that were not targeted. 
 
-4. 
+The data is still worth analyzing because it tells us how ineffective the sensors were as they displayed false positives a majority of the time. Additionally, the data that the public got as a result of the data leak was able to tell us about the specific locations of the sensors. I think this data is especially helpful to analyze in deciding whether this sort of targeted surveillance is ethically okay. The data on the locations of the sensors led to discussions where people advocated for knowing more about how data is being collection. Therefore, analyzing data might give you an answer that you might not have predicted, but could bring up important discussions and questions.
 
 
+4. Is the data being used in unintended ways to the original study?
 
+In another article by ACLU titled, "Four Problems with the ShotSpotter Gunshot Detection System", Jay Stanley highlighted how the increased ShotSpotter incidents reported to the police has led to an increase in stop and frisk searches in the communities with sensors. The original point of the data was to investigate whether a gunshot incident had occurred in a specific location. However, does this audio recording give enough evidence for police to stop and search people in the area around the sensors. The main goal of ShotSpotter that was outlined in the privacy protections was to decrease the number of gun related incidents using the audio recordings, however, they never specified that using those recordings would increase the stops and searches in those neighborhoods. Stanley also argued that increased surveillance can distort gun statistics and create justification for surveying communities of color more, creating a cycle of injustice.
+
+
+### Conclusion
