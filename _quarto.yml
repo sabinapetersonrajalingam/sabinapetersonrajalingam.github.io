@@ -16,6 +16,8 @@ website:
         href: office_lines.html
       - text: UK Weather
         href: UK_Weather.html
+      - text: Data Ethics
+        href: Data_Ethics.qmd
 
 format:
   html:
